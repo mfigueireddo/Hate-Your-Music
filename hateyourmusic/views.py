@@ -1,38 +1,24 @@
 from django.shortcuts import render, redirect
 from .models import Profile
 from django.contrib.auth.models import User
-from django.core.validators import validate_email, URLValidator
-from django.core.exceptions import ValidationError
-from django.contrib.auth.password_validation import validate_password
+from .validate import validador_usuario, validador_email, validador_senha, validador_url, validador_nome, validador_aniversario
 
 
 def home(request):
   return render(request, "home.html")
 
 def create_user(request):
+  
   if request.method == "POST":
 
     username = request.POST["username"]
-
-    if User.objects.filter(username=username).first():
-      return render(request, "register.html", context={"username_error":True})
+    validador_usuario(username,request)
 
     email = request.POST["email"]
-
-    try:
-      validate_email(email)
-    except ValidationError:
-      return render(request, "register.html", context={"invalid_email": True})
-    
-    if User.objects.filter(email=email).first():
-      return render(request, "register.html", context={"email_error":True})
+    validador_email(email,request)
 
     password = request.POST["password"]
-    
-    try:
-      validate_password(password)
-    except Exception as error_message:
-      return render(request, "register.html", context={"password_error": True, "error_message": error_message})
+    validador_senha(password,request)
       
     user = User.objects.create_user(
       username,
@@ -43,26 +29,21 @@ def create_user(request):
     user.save()
 
     url = request.POST["url"]
-    
-    if url:
-      url_validator =  URLValidator()
-      try:
-        url_validator(url)
-      except ValidationError:
-        return render(request, "register.html", context={"invalid_url": True})
+    validador_url(url,request)
 
     name = request.POST["name"]
+    name = validador_nome(name,username)
 
-    if not name:
-      name = username
+    birthday = request.POST["birthday"]
+    birthday = validador_aniversario(birthday)
     
     Profile.objects.create(
-      user=user,
+      user = user,
       biography = request.POST["biography"],
       name = name,
       location = request.POST["location"],
       url = url,
-      birthday = request.POST["birthday"] if request.POST["birthday"] else None,
+      birthday = birthday,
       profile_picture = request.POST["profile_picture"],
       profile_background = request.POST["profile_background"]
     )
