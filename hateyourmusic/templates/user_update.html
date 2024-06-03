@@ -1,3 +1,5 @@
+<h1>Atualizar usuário</h1>
+
 <form method="POST">
 
   {% csrf_token %}
@@ -6,7 +8,7 @@
   <div>
 
     <label>Nome de usuário:</label>
-    <input type="text" name="username">
+    <input type="text" name="username" value="{{ user.username }}">
 
   </div>
 
@@ -14,7 +16,7 @@
   <div>
 
     <label>Nome:</label>
-    <input type="text" name="name">
+    <input type="text" name="name" value="{{ profile.name }}">
 
   </div>
 
@@ -26,19 +28,11 @@
 
   </div>
 
-  <!-- Senha -->
-  <div>
-
-    <label>Senha:</label>
-    <input type="password" name="password">
-
-  </div>
-
   <!-- Biografia -->
   <div>
 
     <label>Biografia:</label>
-    <input type="text" name="biography">
+    <input type="text" name="biography" value="{{ profile.biography }}">
 
   </div>
 
@@ -46,7 +40,7 @@
   <div>
 
     <label>Localização:</label>
-    <input type="text" name="location">
+    <input type="text" name="location" value="{{ profile.location }}">
 
   </div>
 
@@ -54,7 +48,7 @@
   <div>
 
     <label>Site:</label>
-    <input type="url" name="url">
+    <input type="url" name="url" value="{{ profile.url }}">
 
   </div>
 
@@ -62,7 +56,7 @@
   <div>
 
     <label>Aniversário:</label>
-    <input type="date" name="birthday">
+    <input type="date" name="birthday" value="{{ profile.birthday }}">
 
   </div>
 
@@ -70,7 +64,7 @@
   <div>
 
     <label>Foto de perfil:</label>
-    <input type="file" name="profile_picture">
+    <input type="file" name="profile_picture" value="{{ profile.profile_picture }}">
 
   </div>
 
@@ -78,12 +72,12 @@
   <div>
 
     <label>Foto de fundo:</label>
-    <input type="file" name="profile_background">
+    <input type="file" name="profile_background" value="{{ profile.profile_background }}">
 
   </div>
 
   <!-- Botão de registro -->
-  <input type="submit" value="Registrar">
+  <input type="submit" value="Atualizar">
 
 </form>
 
@@ -101,11 +95,4 @@
 
 {% if invalid_url %}
   Erro: o url é inválido.
-{% endif %}
-
-{% if password_error %}
-  {% for message in error_message %}
-    {{ message }}
-    <br>
-  {% endfor %}
 {% endif %}

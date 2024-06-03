@@ -1,0 +1,28 @@
+<form method="POST">
+
+  {% csrf_token %}
+
+  <!-- Nome de usuário -->
+  <div>
+
+    <label>Nome de usuário:</label>
+    <input type="text" name="username" required>
+
+  </div>
+
+  <!-- Senha -->
+  <div>
+
+    <label>Senha:</label>
+    <input type="password" name="password" required>
+
+  </div>
+
+  <!-- Botão de registro -->
+  <input type="submit" value="Login">
+
+  <br>
+
+  <span style="color:red">{{ error_message }}</span>
+
+</form>

@@ -1,0 +1,118 @@
+<h1>Registrar usuário</h1>
+
+<form method="POST">
+
+  {% csrf_token %}
+
+  <!-- Nome de usuário -->
+  <div>
+
+    <label>Nome de usuário:</label>
+    <input type="text" name="username" required>
+
+  </div>
+
+  <!-- Nome -->
+  <div>
+
+    <label>Nome:</label>
+    <input type="text" name="name">
+
+  </div>
+
+  <!-- E-mail -->
+  <div>
+
+    <label>E-mail:</label>
+    <input type="email" name="email" required>
+
+  </div>
+
+  <!-- Senha -->
+  <div>
+
+    <label>Senha:</label>
+    <input type="password" name="password" required>
+
+  </div>
+
+  <!-- Biografia -->
+  <div>
+
+    <label>Biografia:</label>
+    <input type="text" name="biography">
+
+  </div>
+
+  <!-- Localização -->
+  <div>
+
+    <label>Localização:</label>
+    <input type="text" name="location">
+
+  </div>
+
+  <!-- Site -->
+  <div>
+
+    <label>Site:</label>
+    <input type="url" name="url">
+
+  </div>
+
+  <!-- Aniversário -->
+  <div>
+
+    <label>Aniversário:</label>
+    <input type="date" name="birthday">
+
+  </div>
+
+  <!-- Foto de perfil -->
+  <div>
+
+    <label>Foto de perfil:</label>
+    <input type="file" name="profile_picture">
+
+  </div>
+
+  <!-- Foto de fundo -->
+  <div>
+
+    <label>Foto de fundo:</label>
+    <input type="file" name="profile_background">
+
+  </div>
+
+  <!-- Botão de registro -->
+  <input type="submit" value="Registrar">
+
+</form>
+
+{% if username_error %}
+  Erro: o nome de usuário já existe.
+{% endif %}
+
+{% if invalid_email %}
+  Erro: insira um email válido.
+{% endif %}
+
+{% if email_error %}
+  Erro: o email já foi cadastrado.
+{% endif %}
+
+{% if invalid_url %}
+  Erro: o url é inválido.
+{% endif %}
+
+{% if password_error %}
+  {% for message in password_error_message %}
+    {{ message }}
+    <br>
+  {% endfor %}
+{% endif %}
+
+{% if creation_error %}
+  Houve um erro na criação do usuário.
+  {{ creation_error_message }}
+{% endif %}
