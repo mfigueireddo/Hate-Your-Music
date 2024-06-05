@@ -1,0 +1,15 @@
+<div>
+  <h2>Usuários cadastrados</h2>
+  {% for user in users %}
+    {{ user.username }} 
+    <a href="/users/profile/{{ user.id }}">Visualizar</a>
+    <a href="/users/update/{{ user.id }}">Editar perfil</a> 
+    <a href="/users/update_password/{{ user.id }}">Editar senha</a> 
+    <a href="/users/delete/{{ user.id }}">Deletar</a> <br>
+  {% endfor %}
+</div>
+
+<div>
+  <h2>Criar perfil</h2>
+  <a href="/users/create">Criar perfil</a>
+</div>

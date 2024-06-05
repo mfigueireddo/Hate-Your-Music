@@ -1,0 +1,46 @@
+<div> 
+  Nome de usuário:
+  {{ user.username }}
+</div>
+
+<div>
+  Nome:
+  {{ profile.name }}
+</div>
+
+<div>
+  Email:
+  {{ user.email}}
+</div>
+
+<div>
+  Biografia:
+  {{ profile.biography }}
+</div>
+
+<div> 
+  Localização:
+  {{ profile.location }}
+</div>
+
+<div>
+  Site:
+  <a href="{{ profile.url }}" target="_blank">{{ profile.url }}</a>
+</div>
+
+<div>
+  Aniversário:
+  {% if profile.birthday %}
+    {{ profile.birthday }}
+  {% endif %}
+</div>
+
+<div>
+  Foto de perfil:
+  <img src="{{ MEDIA_URL }}{{ profile.picture }}"> 
+</div>
+
+<div>
+  Foto de fundo:
+  <img src="{{ MEDIA_URL }}{{ profile.background }}"> 
+</div>

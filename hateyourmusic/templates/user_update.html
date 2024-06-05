@@ -4,79 +4,51 @@
 
   {% csrf_token %}
 
-  <!-- Nome de usuário -->
   <div>
-
     <label>Nome de usuário:</label>
     <input type="text" name="username" value="{{ user.username }}">
-
   </div>
 
-  <!-- Nome -->
   <div>
-
     <label>Nome:</label>
     <input type="text" name="name" value="{{ profile.name }}">
-
   </div>
 
-  <!-- E-mail -->
   <div>
-
     <label>E-mail:</label>
-    <input type="email" name="email">
-
+    <input type="email" name="email" value="{{ user.email }}">
   </div>
 
-  <!-- Biografia -->
   <div>
-
     <label>Biografia:</label>
     <input type="text" name="biography" value="{{ profile.biography }}">
-
   </div>
-
-  <!-- Localização -->
+  
   <div>
-
     <label>Localização:</label>
     <input type="text" name="location" value="{{ profile.location }}">
-
   </div>
 
-  <!-- Site -->
   <div>
-
     <label>Site:</label>
     <input type="url" name="url" value="{{ profile.url }}">
-
   </div>
 
-  <!-- Aniversário -->
   <div>
-
     <label>Aniversário:</label>
     <input type="date" name="birthday" value="{{ profile.birthday }}">
-
   </div>
-
-  <!-- Foto de perfil -->
+  
   <div>
-
     <label>Foto de perfil:</label>
-    <input type="file" name="profile_picture" value="{{ profile.profile_picture }}">
-
+    <input type="file" name="picture" value="{{ profile.picture }}">
   </div>
 
-  <!-- Foto de fundo -->
   <div>
-
     <label>Foto de fundo:</label>
-    <input type="file" name="profile_background" value="{{ profile.profile_background }}">
-
+    <input type="file" name="background" value="{{ profile.background }}">
   </div>
 
-  <!-- Botão de registro -->
   <input type="submit" value="Atualizar">
 
 </form>

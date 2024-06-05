@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from hateyourmusic import validate
 from django.db import transaction
+from django.conf import settings
 
 def home(request):
   return render(request, "home.html")
@@ -20,8 +21,8 @@ def create_user(request):
     location = request.POST["location"]
     url = request.POST["url"]
     birthday = request.POST["birthday"]
-    profile_picture = request.POST["profile_picture"]
-    profile_background = request.POST["profile_background"]
+    picture = request.POST["picture"]
+    background = request.POST["background"]
     
     if not validate.validador_usuario(username,request): 
       return render(request, "user_register.html", context={"username_error":True})
@@ -44,6 +45,12 @@ def create_user(request):
     
     birthday = validate.validador_aniversario(birthday)
 
+    if picture:
+      picture = validate.validador_imagem_perfil(picture)
+
+    if background:
+      background = validate.validador_imagem_fundo(background)
+
     # Garante que o usuário seja criado juntamente ao perfil
     try:
       
@@ -60,8 +67,8 @@ def create_user(request):
               location=location,
               url=url,
               birthday=birthday,
-              profile_picture=profile_picture,
-              profile_background=profile_background
+              picture=picture,
+              background=background
           )
 
       return redirect("home")
@@ -120,24 +127,31 @@ def update_user(request,id):
     location = request.POST["location"]
     url = request.POST["url"]
     birthday = request.POST["birthday"]
-    profile_picture = request.POST["profile_picture"]
-    profile_background = request.POST["profile_background"]
+    picture = request.POST["picture"]
+    background = request.POST["background"]
     
     if username != user.username and validate.validador_usuario(username,request):
-        return render(request, "user_update.html", context={"username_error":True})
+        return render(request, "user_update.html", context={"username_error":True,"profile":profile,"user":user})
 
-    # Caso o email seja inválido
-    if validate.validador_email(email,request) == 1:
-      return render(request, "user_update.html", context={"invalid_email": True})
-    # Caso o email já esteja cadastrado no sistema
-    elif validate.validador_email(email,request) == 2:
-      return render(request, "user_update.html", context={"email_error":True})
-
+    if email != user.email:
+      # Caso o email seja inválido
+      if validate.validador_email(email,request) == 1:
+        return render(request, "user_update.html", context={"invalid_email": True,"profile":profile,"user":user})
+      # Caso o email já esteja cadastrado no sistema
+      elif validate.validador_email(email,request) == 2:
+        return render(request, "user_update.html", context={"email_error":True,"profile":profile,"user":user})
+  
     if not validate.validador_url(url,request):
-      render(request, "user_update.html", context={"invalid_url": True})
+      render(request, "user_update.html", context={"invalid_url": True,"profile":profile,"user":user})
 
     birthday = validate.validador_aniversario(birthday)
 
+    if picture:
+      picture = validate.validador_imagem_perfil(picture)
+
+    if background:
+      background = validate.validador_imagem_fundo(background)
+    
     user.username = username
     user.email = email
     profile.biography = biography
@@ -145,8 +159,8 @@ def update_user(request,id):
     profile.location = location
     profile.url = url
     profile.birthday = birthday
-    profile.profile_picture = profile_picture
-    profile.profile_background = profile_background
+    profile.picture = picture
+    profile.background = background
     
     user.save()
     profile.save()
@@ -182,3 +196,13 @@ def update_password(request,id):
     return redirect("home")
 
   return render(request,"user_update_password.html")
+
+def show_profile(request,id):
+  user = User.objects.get(id = id)
+  profile = Profile.objects.get(user=user)
+  return render(request,"user_profile.html",context={"profile":profile,"user":user,"MEDIA_URL": settings.MEDIA_URL})
+
+def admin_view(request):
+  users = User.objects.all()
+  profiles = Profile.objects.all()
+  return render(request,"admin_view.html",context={"users":users,"profiles": profiles})
