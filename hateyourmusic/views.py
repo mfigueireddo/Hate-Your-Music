@@ -110,10 +110,17 @@ def logout_user(request):
 def delete_user(request,id):
 
   user = User.objects.get(id=id)
+  profile = Profile.objects.get(user=user)
 
   if request.method=="POST":
 
     if "sim" in request.POST:
+      if profile.icon.name != "default/default_icon.jpg":
+        caminho = os.path.join(settings.MEDIA_ROOT,profile.icon.name)
+        os.remove(caminho)
+      if profile.background.name != "default/default_background.jpg":
+        caminho = os.path.join(settings.MEDIA_ROOT,profile.background.name)
+        os.remove(caminho)
       user.delete()
     
     return redirect("home")
@@ -142,8 +149,21 @@ def update_user(request,id):
           return render(request, "user_update.html", context={"username_error":True,"profile":profile,"user":user})
       else:
         user.username = username
-        profile.icon.name = str(username) + '.' + profile.icon.name.split('.')[-1]
-        profile.background.name = str(username) + '.' + profile.background.name.split('.')[-1]
+
+        if profile.icon.name != "default/default_icon.jpg":
+          
+          caminho_icon_antigo = os.path.join(settings.MEDIA_ROOT,profile.icon.name)
+          profile.icon.name = "profile_icons/" + str(username) + '.' + profile.icon.name.split('.')[-1]
+          caminho_icon_novo = os.path.join(settings.MEDIA_ROOT,profile.icon.name)
+          os.rename(caminho_icon_antigo,caminho_icon_novo)
+
+
+        if profile.background.name != "default/default_background.jpg":
+          
+          caminho_background_antigo = os.path.join(settings.MEDIA_ROOT,profile.background.name)
+          profile.background.name = "profile_backgrounds/" + str(username) + '.' + profile.background.name.split('.')[-1]
+          caminho_background_novo = os.path.join(settings.MEDIA_ROOT,profile.background.name)
+          os.rename(caminho_background_antigo,caminho_background_novo)
 
     if email != user.email:
       # Caso o email seja inválido
@@ -178,14 +198,14 @@ def update_user(request,id):
       profile.birthday = validate.validador_aniversario(birthday)
 
     if icon:
-      if profile.icon.name != "default_icon.jpg":
+      if profile.icon.name != "default/default_icon.jpg":
         caminho = os.path.join(settings.MEDIA_ROOT,profile.icon.name)
         os.remove(caminho)
       icon.name = str(username) + '.' + icon.name.split('.')[-1]
       profile.icon = validate.validador_imagem_perfil(icon)
 
     if background:
-      if profile.background.name != "default_background.jpg":
+      if profile.background.name != "default/default_background.jpg":
         caminho = os.path.join(settings.MEDIA_ROOT,profile.background.name)
         os.remove(caminho)
       background.name = str(username) + '.' + background.name.split('.')[-1]
