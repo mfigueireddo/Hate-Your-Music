@@ -21,36 +21,40 @@ def create_user(request):
     location = request.POST["location"]
     url = request.POST["url"]
     birthday = request.POST["birthday"]
-    picture = request.POST["picture"]
-    background = request.POST["background"]
+    icon = request.FILES.get("icon")
+    background = request.FILES.get("background")
     
-    if not validate.validador_usuario(username,request): 
+    if not validate.validador_usuario(username): 
       return render(request, "user_register.html", context={"username_error":True})
 
     # Caso o email seja inválido
-    if validate.validador_email(email,request) == 1:
+    if validate.validador_email(email) == 1:
       return render(request, "user_register.html", context={"invalid_email": True})
     # Caso o email já esteja cadastrado no sistema
-    elif validate.validador_email(email,request) == 2:
+    elif validate.validador_email(email) == 2:
       return render(request, "user_register.html", context={"email_error":True})
 
     password_error_message = validate.validador_senha(password,request)
     if password_error_message != 0:
       return render(request, "user_register.html", context={"password_error": True, "password_error_message": password_error_message})
 
-    if not validate.validador_url(url,request):
+    if not validate.validador_url(url):
       render(request, "user_register.html", context={"invalid_url": True})
 
     name = validate.validador_nome(name,username)
     
     birthday = validate.validador_aniversario(birthday)
 
-    if picture:
-      picture = validate.validador_imagem_perfil(picture)
-
+    if icon:
+      icon_path = validate.validador_imagem_perfil(icon)
+    else:
+      icon_path = settings.DEFAULT_ICON_IMAGE_PATH
+    
     if background:
-      background = validate.validador_imagem_fundo(background)
-
+      background_path = validate.validador_imagem_fundo(background)
+    else:
+      background_path = settings.DEFAULT_BACKGROUND_IMAGE_PATH
+      
     # Garante que o usuário seja criado juntamente ao perfil
     try:
       
@@ -67,10 +71,10 @@ def create_user(request):
               location=location,
               url=url,
               birthday=birthday,
-              picture=picture,
-              background=background
+              icon=icon_path,
+              background=background_path,
           )
-
+        
       return redirect("home")
       
     except Exception as erro:
@@ -127,27 +131,27 @@ def update_user(request,id):
     location = request.POST["location"]
     url = request.POST["url"]
     birthday = request.POST["birthday"]
-    picture = request.POST["picture"]
-    background = request.POST["background"]
+    icon = request.FILES.get("icon")
+    background = request.FILES.get("background")
     
-    if username != user.username and validate.validador_usuario(username,request):
+    if username != user.username and validate.validador_usuario(username):
         return render(request, "user_update.html", context={"username_error":True,"profile":profile,"user":user})
 
     if email != user.email:
       # Caso o email seja inválido
-      if validate.validador_email(email,request) == 1:
+      if validate.validador_email(email) == 1:
         return render(request, "user_update.html", context={"invalid_email": True,"profile":profile,"user":user})
       # Caso o email já esteja cadastrado no sistema
-      elif validate.validador_email(email,request) == 2:
+      elif validate.validador_email(email) == 2:
         return render(request, "user_update.html", context={"email_error":True,"profile":profile,"user":user})
   
-    if not validate.validador_url(url,request):
+    if not validate.validador_url(url):
       render(request, "user_update.html", context={"invalid_url": True,"profile":profile,"user":user})
 
     birthday = validate.validador_aniversario(birthday)
 
-    if picture:
-      picture = validate.validador_imagem_perfil(picture)
+    if icon:
+      icon = validate.validador_imagem_perfil(icon)
 
     if background:
       background = validate.validador_imagem_fundo(background)
@@ -159,7 +163,7 @@ def update_user(request,id):
     profile.location = location
     profile.url = url
     profile.birthday = birthday
-    profile.picture = picture
+    profile.icon = icon
     profile.background = background
     
     user.save()
@@ -200,7 +204,7 @@ def update_password(request,id):
 def show_profile(request,id):
   user = User.objects.get(id = id)
   profile = Profile.objects.get(user=user)
-  return render(request,"user_profile.html",context={"profile":profile,"user":user,"MEDIA_URL": settings.MEDIA_URL})
+  return render(request,"user_profile.html",context={"profile":profile,"user":user})
 
 def admin_view(request):
   users = User.objects.all()

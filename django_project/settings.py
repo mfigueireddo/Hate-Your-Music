@@ -85,5 +85,8 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_URL = 'hateyourmusic/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'hateyourmusic','media')
+
+DEFAULT_ICON_IMAGE_PATH = 'default/default_icon.jpg'
+DEFAULT_BACKGROUND_IMAGE_PATH = 'default/default_background.jpg'

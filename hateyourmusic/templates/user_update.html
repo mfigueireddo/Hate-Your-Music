@@ -1,6 +1,6 @@
 <h1>Atualizar usuário</h1>
 
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
 
   {% csrf_token %}
 
@@ -41,12 +41,14 @@
   
   <div>
     <label>Foto de perfil:</label>
-    <input type="file" name="picture" value="{{ profile.picture }}">
+    <img src="{{ profile.icon.url }}">
+    <input type="file" name="icon"">
   </div>
 
   <div>
     <label>Foto de fundo:</label>
-    <input type="file" name="background" value="{{ profile.background }}">
+    <img src="{{ profile.background.url }}">
+    <input type="file" name="background">
   </div>
 
   <input type="submit" value="Atualizar">

@@ -4,14 +4,15 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.password_validation import validate_password
 from PIL import Image
 from io import BytesIO
-from django.core.files.base import ContentFile
+import os
+from django.conf import settings
 
-def validador_usuario(username,request):
+def validador_usuario(username):
   if User.objects.filter(username=username).first():
     return False
   return True
 
-def validador_email(email,request):
+def validador_email(email):
   try:
     validate_email(email)
   # Email inválido
@@ -29,7 +30,7 @@ def validador_senha(password,request):
     return error_message
   return 0
 
-def validador_url(url,request):
+def validador_url(url):
   if url:
     url_validator =  URLValidator()
     try:
@@ -51,35 +52,46 @@ def validador_aniversario(birthday):
 
 def validador_imagem_perfil(image):
 
-  max_width = 800
-  max_height = 800
-  img = Image.open(image)
-
-  if img.width > max_width or img.height > max_height:
+  max_width = 500
+  max_height = 500
+  aux = Image.open(image)
+  
+  if aux.width > max_width or aux.height > max_height:
     output_size = (max_width, max_height)
-    img.thumbnail(output_size, Image.ANTIALIAS)
-
+    aux.thumbnail(output_size, Image.Resampling.LANCZOS)
+  
     image_io = BytesIO()
     image_format = image.name.split('.')[-1].upper()
-    img.save(image_io, format=image_format)
-
-    image = ContentFile(image_io.getvalue(), name=image.name)
-
-  return image
+    image_format = "JPEG" if image_format == "JPG" else None
+    aux.save(image_io, format=image_format)
+  
+    image_path = os.path.join(settings.MEDIA_ROOT, 'profile_icons', image.name)
+    with open(image_path, 'wb') as f:
+        f.write(image_io.getvalue())
+    image_path = os.path.join('profile_icons', image.name)
+    return image_path
+  
+  return image.path
 
 def validador_imagem_fundo(image):
+
   max_width = 1600
   max_height = 1600
-  img = Image.open(image)
-
-  if img.width > max_width or img.height > max_height:
+  aux = Image.open(image)
+  
+  if aux.width > max_width or aux.height > max_height:
     output_size = (max_width, max_height)
-    img.thumbnail(output_size, Image.ANTIALIAS)
-
+    aux.thumbnail(output_size, Image.Resampling.LANCZOS)
+  
     image_io = BytesIO()
     image_format = image.name.split('.')[-1].upper()
-    img.save(image_io, format=image_format)
+    image_format = "JPEG" if image_format == "JPG" else None
+    aux.save(image_io, format=image_format)
+    
+    image_path = os.path.join(settings.MEDIA_ROOT, 'profile_backgrounds', image.name)
+    with open(image_path, 'wb') as f:
+      f.write(image_io.getvalue())
+    image_path = os.path.join('profile_backgrounds', image.name)
+    return image_path
 
-    image = ContentFile(image_io.getvalue(), name=image.name)
-
-  return image
+  return image.path

@@ -1,6 +1,6 @@
 <h1>Registrar usuário</h1>
 
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
 
   {% csrf_token %}
 
@@ -46,7 +46,7 @@
 
   <div>
     <label>Foto de perfil:</label>
-    <input type="file" name="picture">
+    <input type="file" name="icon">
   </div>
 
   <div>
@@ -81,7 +81,7 @@
   {% endfor %}
 {% endif %}
 
-{% if picture_error %}
+{% if icon_error %}
   Erro: a imagem de perfil deve ser, no máximo, de 800x800
 {% endif %}
 

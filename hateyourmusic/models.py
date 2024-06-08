@@ -9,5 +9,5 @@ class Profile(models.Model):
   url = models.URLField(blank=True)
   birthday = models.DateField(null=True, blank=True)
   date_joined = models.DateField(auto_now_add=True)
-  picture = models.ImageField(default="profile_default.jpg", upload_to="profile_pictures/")
-  background = models.ImageField(default="background_default.png", upload_to="profile_backgrounds/")
+  icon = models.ImageField(null=True,blank=True,upload_to="profile_icons/")
+  background = models.ImageField(null=True,blank=True,upload_to="profile_backgrounds/")
