@@ -5,6 +5,7 @@ from django.contrib.auth import login, authenticate, logout
 from hateyourmusic import validate
 from django.db import transaction
 from django.conf import settings
+import os
 
 def home(request):
   return render(request, "home.html")
@@ -46,11 +47,13 @@ def create_user(request):
     birthday = validate.validador_aniversario(birthday)
 
     if icon:
+      icon.name = str(username) + '.' + icon.name.split('.')[-1]
       icon_path = validate.validador_imagem_perfil(icon)
     else:
       icon_path = settings.DEFAULT_ICON_IMAGE_PATH
     
     if background:
+      background.name = str(username) + '.' + background.name.split('.')[-1]
       background_path = validate.validador_imagem_fundo(background)
     else:
       background_path = settings.DEFAULT_BACKGROUND_IMAGE_PATH
@@ -133,9 +136,14 @@ def update_user(request,id):
     birthday = request.POST["birthday"]
     icon = request.FILES.get("icon")
     background = request.FILES.get("background")
-    
-    if username != user.username and validate.validador_usuario(username):
-        return render(request, "user_update.html", context={"username_error":True,"profile":profile,"user":user})
+
+    if username != user.username:
+      if not validate.validador_usuario(username):
+          return render(request, "user_update.html", context={"username_error":True,"profile":profile,"user":user})
+      else:
+        user.username = username
+        profile.icon.name = str(username) + '.' + profile.icon.name.split('.')[-1]
+        profile.background.name = str(username) + '.' + profile.background.name.split('.')[-1]
 
     if email != user.email:
       # Caso o email seja inválido
@@ -144,27 +152,44 @@ def update_user(request,id):
       # Caso o email já esteja cadastrado no sistema
       elif validate.validador_email(email) == 2:
         return render(request, "user_update.html", context={"email_error":True,"profile":profile,"user":user})
-  
-    if not validate.validador_url(url):
-      render(request, "user_update.html", context={"invalid_url": True,"profile":profile,"user":user})
+      else:
+        user.email = email
 
-    birthday = validate.validador_aniversario(birthday)
+    if biography:
+      if biography != profile.biography:
+        profile.biography = biography
+
+    if name:
+      if name != profile.name:
+        profile.name = name
+
+    if location:
+      if location != profile.location:
+        profile.location = location
+    
+    if url:
+      if url != profile.url:
+        if not validate.validador_url(url):
+          render(request, "user_update.html", context={"invalid_url": True,"profile":profile,"user":user})
+        else:
+          user.url = url
+
+    if birthday != profile.birthday:
+      profile.birthday = validate.validador_aniversario(birthday)
 
     if icon:
-      icon = validate.validador_imagem_perfil(icon)
+      if profile.icon.name != "default_icon.jpg":
+        caminho = os.path.join(settings.MEDIA_ROOT,profile.icon.name)
+        os.remove(caminho)
+      icon.name = str(username) + '.' + icon.name.split('.')[-1]
+      profile.icon = validate.validador_imagem_perfil(icon)
 
     if background:
-      background = validate.validador_imagem_fundo(background)
-    
-    user.username = username
-    user.email = email
-    profile.biography = biography
-    profile.name = name
-    profile.location = location
-    profile.url = url
-    profile.birthday = birthday
-    profile.icon = icon
-    profile.background = background
+      if profile.background.name != "default_background.jpg":
+        caminho = os.path.join(settings.MEDIA_ROOT,profile.background.name)
+        os.remove(caminho)
+      background.name = str(username) + '.' + background.name.split('.')[-1]
+      profile.background = validate.validador_imagem_fundo(background)
     
     user.save()
     profile.save()
