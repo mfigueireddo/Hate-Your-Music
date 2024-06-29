@@ -88,5 +88,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = 'hateyourmusic/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'hateyourmusic','media')
 
-DEFAULT_ICON_IMAGE_PATH = 'default/default_icon.jpg'
-DEFAULT_BACKGROUND_IMAGE_PATH = 'default/default_background.jpg'
+DEFAULT_ICON_IMAGE_PATH = 'default/icon.jpg'
+DEFAULT_BACKGROUND_IMAGE_PATH = 'default/background.jpg'
+DEFAULT_COVER_IMAGE_PATH = 'default/cover.jpg'

@@ -1,0 +1,14 @@
+<h1>Selecione suas músicas</h1>
+
+<form method="POST">
+
+  {% csrf_token %}
+  
+  {% for music in musics %}
+    <div>
+      {{ music.name }} - {{ music.artist }}
+      <input type="hidden" name="music" value="{{ music.id }}">
+      <input type="submit" value="Adicionar">
+    </div>
+  {% endfor %}
+</form>

@@ -1,0 +1,28 @@
+<h1>Registrar música</h1>
+
+<form method="POST" enctype="multipart/form-data">
+
+  {% csrf_token %}
+
+  <div>
+    <label>Nome:</label>
+    <input type="text" name="name" required>
+  </div>
+
+  <div>
+    <label>Artista:</label>
+    <input type="text" name="artist" required>
+  </div>
+
+  <div>
+    <label>URL:</label>
+    <input type="url" name="url" required>
+  </div>
+  
+  <input type="submit" value="Registrar">
+
+</form>
+
+{% if invalid_url %}
+  Erro: o URL é inválido.
+{% endif %}

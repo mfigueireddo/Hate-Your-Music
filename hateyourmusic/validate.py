@@ -6,7 +6,6 @@ from PIL import Image
 from io import BytesIO
 import os
 from django.conf import settings
-import tempfile
 
 def validador_usuario(username):
   if User.objects.filter(username=username).first():
@@ -51,7 +50,7 @@ def validador_aniversario(birthday):
   else:
     return None
 
-def validador_imagem_perfil(image):
+def validador_icon(image):
 
   max_width = 500
   max_height = 500
@@ -73,7 +72,7 @@ def validador_imagem_perfil(image):
   image_path = os.path.join('profile_icons', image.name)
   return image_path
 
-def validador_imagem_fundo(image):
+def validador_fundo(image):
 
   max_width = 1600
   max_height = 1600
@@ -91,4 +90,26 @@ def validador_imagem_fundo(image):
   with open(image_path, 'wb') as f:
     f.write(image_io.getvalue())
   image_path = os.path.join('profile_backgrounds', image.name)
+  return image_path
+
+def validador_cover(image):
+
+  max_width = 500
+  max_height = 500
+  aux = Image.open(image)
+  
+  output_size = (max_width, max_height)
+  aux.thumbnail(output_size, Image.Resampling.LANCZOS)
+  
+  image_io = BytesIO()
+  
+  image_format = image.name.split('.')[-1].upper()
+  image_format = "JPEG" if image_format == "JPG" else None
+  
+  aux.save(image_io, format=image_format)
+  
+  image_path = os.path.join(settings.MEDIA_ROOT, 'playlist_covers', image.name)
+  with open(image_path, 'wb') as f:
+    f.write(image_io.getvalue())
+  image_path = os.path.join('playlist_covers', image.name)
   return image_path
