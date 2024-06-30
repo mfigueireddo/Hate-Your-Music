@@ -3,12 +3,18 @@
 <form method="POST">
 
   {% csrf_token %}
+
+  <a href="{% url 'playlist_view' playlist.id %}">Ver playlist</a>
   
   {% for music in musics %}
     <div>
       {{ music.name }} - {{ music.artist }}
-      <input type="hidden" name="music" value="{{ music.id }}">
-      <input type="submit" value="Adicionar">
+      {% if music in playlist_musics %}
+        Já adicionada
+      {% else %}
+        <input type="hidden" name="music" value="{{ music.id }}">
+        <input type="submit" value="Adicionar">
+      {% endif %}
     </div>
   {% endfor %}
 </form>

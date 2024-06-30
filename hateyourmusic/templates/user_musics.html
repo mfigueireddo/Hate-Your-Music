@@ -5,9 +5,9 @@
 
 <div>
   {% for music in musics %}
-    {{ music.name }} - {{ music.artist }
-    <a href="{% url 'music_view' music.id %}">Ver</a> <br>
-    <a href="{% url 'music_update' music.id %}">Editar</a> <br>
+    {{ music.name }} - {{ music.artist }}
+    <a href="{% url 'music_view' music.id %}">Ver</a>
+    <a href="{% url 'music_update' music.id %}">Editar</a>
     <a href="{% url 'music_delete' music.id %}">Deletar</a>
   {% endfor %}
 </div>

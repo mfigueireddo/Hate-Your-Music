@@ -251,7 +251,7 @@ def user_musics(request,id):
 
   user = User.objects.get(id=id)
   context = {"user":user}
-  context["musics"] = Music.objects.get(user=user)
+  context["musics"] = Music.objects.filter(user=user)
   
   return render(request, "user_musics.html", context)
 
@@ -259,7 +259,7 @@ def user_musics(request,id):
 def user_playlists(request,id):
   user = User.objects.get(id=id)
   context = {"user":user}
-  context["playlists"] = Playlist.objects.get(user=user)
+  context["playlists"] = Playlist.objects.filter(user=user)
 
   return render(request, "user_playlists.html", context)
 
@@ -373,7 +373,7 @@ def music_view(request, id):
 def music_menu(request, id):
   user = User.objects.get(id=id)
   context = {"user": user}
-  context["musics"] = Music.objects.get(user=user)
+  context["musics"] = Music.objects.filter(user=user)
   return render(request,"music_menu.html", context)
 
 # Playlist
@@ -405,13 +405,15 @@ def playlist_create(request, id):
 def playlist_add_music(request,id):
 
   playlist = Playlist.objects.get(id=id)
-  musics = Music.objects.all()
+  context = {"playlist": playlist}
+  context["musics"] = Music.objects.all()
+  context["playlist_musics"] = playlist.musics.all()
 
   if request.method == "POST":
     music = request.POST["music"]
     playlist.musics.add(music)
 
-  return render(request,"playlist_add_music.html", context={"playlist":playlist,"musics":musics})
+  return render(request,"playlist_add_music.html", context)
 
 @login_required
 def playlist_delete(request,id):
@@ -436,5 +438,5 @@ def playlist_view(request,id):
 def playlist_menu(request,id):
   user = User.objects.get(id=id)
   context = {"user": user}
-  context["playlists"] = Playlist.objects.get(user=user)
+  context["playlists"] = Playlist.objects.filter(user=user)
   return render(request,"playlist_menu.html", context)

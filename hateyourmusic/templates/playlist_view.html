@@ -1,5 +1,11 @@
+<div>
+  Seja bem-vindo(a), {{ user.username }}! <br>
+  <a href="{% url 'user_logout' %}">Sair</a>
+</div>
+
 {% for music in playlist.musics.all %}
   <div>
-    {{ music.name }} - {{ music.artist }}
+    <a href="{{ music.url }}">{{ music.name }} - {{ music.artist }}</a>
+    
   </div>
 {% endfor %}

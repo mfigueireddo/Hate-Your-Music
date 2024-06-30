@@ -6,6 +6,7 @@
 <div>
   {% for playlist in playlists %}
     {{ playlist.name }}
-    <a href="{% url 'playlist_view' music.id %}">Ver</a> <br>
+    <a href="{% url 'playlist_view' playlist.id %}">Ver</a>
+    <a href="{% url 'playlist_add_music' playlist.id %}">Adicionar músicas</a>
   {% endfor %}
 </div>
