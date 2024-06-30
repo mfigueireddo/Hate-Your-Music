@@ -1,0 +1,131 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hate Your Music</title>
+    <!--<link rel="stylesheet" type="text/css" href="{% static 'main.css' %}" /> -->
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}?v={{ version }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="#">Suas Músicas</a></li>
+        <li><a href="#">Suas Comunidades</a></li>
+        <li><a href="#">Favoritos</a></li>
+        <li><a href="#">Odiados</a></li>
+      </ul>
+      <br />
+      <div class="line"></div>
+      <br />
+      <h3 style="padding: 12px"><b>Trending</b></h3>
+      <ul class="navul">
+        <li><a href="#">Treding#1</a></li>
+        <li><a href="#">Treding#2</a></li>
+        <li><a href="#">Treding#3</a></li>
+        <li><a href="#">Treding#4</a></li>
+        <li><a href="#">Treding#5</a></li>
+        <li><a href="#">Treding#6</a></li>
+        <li><a href="#">Treding#7</a></li>
+        <li><a href="#">Treding#8</a></li>
+      </ul>
+      <br />
+      <div class="line"></div>
+      <br />
+      <h3 style="padding: 12px"><b>Perfil</b></h3>
+      <ul>
+        <li><a href="#">Usuário</a></li>
+        <li><a href="#">Configurações</a></li>
+
+      </ul>
+    </nav>
+    <header>
+      <h1 class="comfortaa-text">
+        <span class="purple">H</span>ate<span class="purple"> Y</span>our <span
+          class="purple"
+          >M</span
+        >usic
+      </h1>
+    </header>
+    <div class="divider"></div>
+    <main>
+      <section>
+        <div class="post-box">
+          <textarea placeholder="O que você está odiando?"></textarea>
+          <a href="posts">
+            <button>Postar</button>
+          </a>
+        </div>
+      </section>
+      {% for p in post %}
+      <section class="post">
+        <div class="post-header">
+          <h2>{{ p.author }}</h2>
+          {% if p.author == request.user.username or request.user.username == "admin1" %}
+          <div class="post-actions">
+            <a href="posts/update/{{ p.id }}" style="color: blue">Editar</a>
+            <a href="posts/delete/{{ p.id }}" style="color: red">Apagar</a>
+          </div>
+          {% endif %}
+        </div>
+        <div class="some-line"></div>
+        <h3>{{ p.theme }}</h3>
+        <p>{{ p.content }}</p>
+        <div class="infobox">
+          <p>Likes: {{ p.numOfLikes }}</p>
+          {% with class="care.hidden" %}
+          {% for l in like %} 
+            {% if l.user == request.user and l.post.id == p.id %}
+              <p>Você já curtiu este post!</p>
+            {% else %}
+              <form class="care" action="{% url 'like_post' p.id %}" method="post">
+                  {% csrf_token %}
+                  <button type="submit">Like</button>
+              </form>
+            {% endif %}
+          {% endfor %}
+          {% endwith %}
+          <p>Dislikes: {{ p.numOfDislikes }}</p>
+          <form action="{% url 'dislike_post' p.id %}" method="post">
+              {% csrf_token %}
+              <button type="submit">Dislike</button>
+          </form>
+        </div>
+        <div style="margin: 20px auto; width: 96%; height: 1px; background-color: black"></div>
+        <ul style="list-style-type: none;">
+          {% for c in comments %}
+          {% if c.post == p %}
+            <div class="comment-box">
+              <li>
+                <p>{{ c.author }}</p>
+                <p>{{ c.content }}</p>
+                <p>{{ c.created_at }}</p>
+              </li>
+              {% if c.author == request.user.username or request.user.username == "admin1" %}
+              <div class="post-actions">
+                <a href="comment/update/{{ c.id }}" style="color: blue">Editar</a>
+                <a href="comment/delete/{{ c.id }}" style="color: red">Apagar</a>
+              </div>
+              {% endif %}
+            </div>
+          {% endif %}
+          {% endfor %}
+        </ul>
+      </section>
+      <section class="comment-sec">
+        <form action="{% url 'create_comment' p.id %}" method="post">
+          {% csrf_token %}
+          <textarea placeholder="Comente sobre o post" id="content" name="content" required></textarea>
+          <button type="submit">Comentar</button>
+        </form>
+      </section>
+      {% endfor %}
+    </main>
+    <footer><span class="ftr-text"">H.Y.M©</span></footer>
+  </body>
+</html>

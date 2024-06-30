@@ -1,0 +1,8 @@
+<div style="width: 300px; margin: 100px auto; border: 1px solid #ccc; padding: 20px; text-align: center;">
+  <h2>Você tem certeza que deseja apagar este post?</h2>
+  <form method="post">
+    {% csrf_token %}
+    <input type="submit" name="confirm" value="Sim, Apagar">
+    <button type="button" onclick="history.back()">Cancelar</button>
+  </form>
+</div>

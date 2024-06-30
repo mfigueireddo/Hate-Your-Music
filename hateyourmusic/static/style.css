@@ -1,0 +1,405 @@
+@media (max-width: 400px){
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  header {
+    background-color: #645dd8;
+    height: 70px;
+    padding: 22px;
+  }
+
+  .comfortaa-text {
+    font-family: "Comfortaa", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: <weight>;
+    font-style: normal;
+    margin: 20px 30px 30px 10px;
+  }
+
+  .purple {
+    color: #9c8ce3;
+  }
+
+  nav {
+    display: none;
+    float: left;
+    width: 150px;
+    position: fixed;
+    background-color: #f7f7f7;
+    height: 100%;
+    overflow-y: auto; /* Adicionando barra de rolagem se o conteúdo ultrapassar a altura */
+  }
+
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  nav ul li {
+    padding: 12px;
+  }
+
+  nav ul li a {
+    text-decoration: none;
+    color: black;
+  }
+
+  .line {
+    height: 1px;
+    background-color: black;
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  div.divider {
+    border-left: 1px solid #ccc;
+    height: calc(100vh - 185px);
+    float: left;
+  }
+
+  main {
+    margin-left: 170px;
+    padding: 20px;
+  }
+
+  .post-box {
+    width: 90%;
+    margin: 20px auto;
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  textarea {
+    width: 90%;
+    height: 100px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+
+  button {
+    background-color: #645dd8;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  #form-container {
+    display: none;
+  }
+
+  #check:checked ~ #form-container {
+    display: block;
+  }
+
+  /*
+  #form-container {
+    display: none;
+  }
+
+  #check:checked ~ #form-container {
+    display: block;
+  }
+  */
+  .post {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .post-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .post-header h2 {
+    margin: 0;
+  }
+
+  .post-actions a {
+    text-decoration: none;
+    color: #555555;
+    margin-left: 10px;
+  }
+
+  .post-actions a:hover {
+    color: #333333;
+  }
+
+  .some-line {
+    width: 50%;
+    height: 1px;
+    background-color: #757575;
+  }
+
+  .infobox {
+    margin-top: 10px;
+  }
+
+  .infobox p {
+    margin: 0;
+    font-size: 14px;
+    color: #777777;
+  }
+
+
+  button:hover {
+    background-color: #564ec6;
+  }
+
+  .comment-sec{
+    margin-top: 0;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid #c5baba;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .comment-box{
+    width: 100%;
+    margin-top: 0;
+    margin-left: -32px;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid #c5baba;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .comment-box:hover {
+    background-color: #c5baba;
+  }
+
+  footer {
+    display: table;
+    background-color: black;
+    height: 60px;
+    width: 100%;
+    clear: both;
+  }
+
+  .ftr-text {
+    display: block;
+    color: white;
+    text-align: center;
+    margin: 15px auto;
+    padding: 15px;
+  }
+}
+
+@media (min-width: 401px) and (max-width: 2160px){
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  header {
+    background-color: #645dd8;
+    height: 70px;
+    padding: 22px;
+    margin-left: 150px;
+  }
+
+  .comfortaa-text {
+    font-family: "Comfortaa", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: <weight>;
+    font-style: normal;
+    margin: 20px 30px 30px 10px;
+  }
+
+  .purple {
+    color: #9c8ce3;
+  }
+
+  nav {
+    float: left;
+    width: 150px;
+    position: fixed;
+    background-color: #f7f7f7;
+    height: 100%;
+    overflow-y: auto; /* Adicionando barra de rolagem se o conteúdo ultrapassar a altura */
+  }
+
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  nav ul li {
+    padding: 12px;
+  }
+
+  nav ul li a {
+    text-decoration: none;
+    color: black;
+  }
+
+  .line {
+    height: 1px;
+    background-color: black;
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  div.divider {
+    border-left: 1px solid #ccc;
+    height: calc(100vh - 185px);
+    float: left;
+  }
+
+  main {
+    margin-left: 170px;
+    padding: 20px;
+  }
+
+  .post-box {
+    width: 90%;
+    margin: 20px auto;
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  textarea {
+    width: 90%;
+    height: 100px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+
+  button {
+    background-color: #645dd8;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  #form-container {
+    display: none;
+  }
+
+  #check:checked ~ #form-container {
+    display: block;
+  }
+
+  /*
+  #form-container {
+    display: none;
+  }
+
+  #check:checked ~ #form-container {
+    display: block;
+  }
+  */
+  .post {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .post-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .post-header h2 {
+    margin: 0;
+  }
+
+  .post-actions a {
+    text-decoration: none;
+    color: #555555;
+    margin-left: 10px;
+  }
+
+  .post-actions a:hover {
+    color: #333333;
+  }
+
+  .some-line {
+    width: 50%;
+    height: 1px;
+    background-color: #757575;
+  }
+
+  .infobox {
+    margin-top: 10px;
+  }
+
+  .infobox p {
+    margin: 0;
+    font-size: 14px;
+    color: #777777;
+  }
+
+
+  button:hover {
+    background-color: #564ec6;
+  }
+
+  .comment-sec{
+    margin-top: 0;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid #c5baba;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .comment-box{
+    width: 100%;
+    margin-top: 0;
+    margin-left: -32px;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid #c5baba;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .comment-box:hover {
+    background-color: #c5baba;
+  }
+
+  footer {
+    display: table;
+    background-color: black;
+    height: 60px;
+    width: 100%;
+    clear: both;
+  }
+
+  .ftr-text {
+    display: block;
+    color: white;
+    text-align: center;
+    margin: 15px auto;
+    padding: 15px;
+  }
+}

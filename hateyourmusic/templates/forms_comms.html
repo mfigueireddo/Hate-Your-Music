@@ -1,0 +1,28 @@
+<style>
+  form {
+    margin: 20px auto;
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  #form-container {
+    display: none;
+  }
+
+  #check:checked ~ #form-container {
+    display: block;
+  }
+</style>
+
+<h1>Postar</h1>
+
+<form method="post">
+  {% csrf_token %}
+  <label for="content">Conteúdo:</label>
+  <textarea id="content" name="content" required>{{ post.content }}</textarea>
+  <br>
+
+  <input type="submit" value="postar">
+</form>

@@ -1,0 +1,43 @@
+<style>
+  h1{
+    margin: 20px auto;
+  }
+  form {
+    margin: 20px auto;
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  #form-container {
+    display: none;
+  }
+
+  #check:checked ~ #form-container {
+    display: block;
+  }
+</style>
+
+<h1>Postar</h1>
+
+<form method="post">
+  {% csrf_token %}
+  <label for="author">Usuário</label>
+  <input type="text" id="author" name="author" value="{{ post.author }}" required>
+  <br>
+  <label for="theme">Tema</label>
+  <input type="text" id="theme" name="theme" value="{{ post.theme }}" required>
+  <br>
+  <label for="content">Conteúdo:</label>
+  <textarea id="content" name="content" required>{{ post.content }}</textarea>
+  <br>
+  <label for="check">Postar Depois</label>
+  <input type="checkbox" id="check">
+  <div id="form-container">
+      <label for="name">Data:</label>
+      <input type="date" id="date" name="data">
+  </div>
+
+  <input type="submit" value="postar">
+</form>
