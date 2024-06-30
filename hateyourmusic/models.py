@@ -5,6 +5,7 @@ class Music(models.Model):
   name = models.TextField(blank=False)
   artist = models.TextField(blank=False)
   url = models.URLField(blank=False)
+  user = models.ForeignKey(User, null=False, on_delete=models.CASCADE)
 
 class Playlist(models.Model):
   name = models.TextField(blank=False)
