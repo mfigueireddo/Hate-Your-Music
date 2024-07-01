@@ -1,0 +1,72 @@
+<h1>Atualizar usuário</h1>
+
+<form method="POST" enctype="multipart/form-data">
+
+  {% csrf_token %}
+
+  <div>
+    <label>Nome de usuário:</label>
+    <input type="text" name="username" value="{{ user.username }}">
+  </div>
+
+  <div>
+    <label>Nome:</label>
+    <input type="text" name="name" value="{{ profile.name }}">
+  </div>
+
+  <div>
+    <label>E-mail:</label>
+    <input type="email" name="email" value="{{ user.email }}">
+  </div>
+
+  <div>
+    <label>Biografia:</label>
+    <input type="text" name="biography" value="{{ profile.biography }}">
+  </div>
+  
+  <div>
+    <label>Localização:</label>
+    <input type="text" name="location" value="{{ profile.location }}">
+  </div>
+
+  <div>
+    <label>Site:</label>
+    <input type="url" name="url" value="{{ profile.url }}">
+  </div>
+
+  <div>
+    <label>Aniversário:</label>
+    <input type="date" name="birthday" value="{{ profile.birthday }}">
+  </div>
+  
+  <div>
+    <label>Foto de perfil:</label>
+    <img src="{{ profile.icon.url }}">
+    <input type="file" name="icon"">
+  </div>
+
+  <div>
+    <label>Foto de fundo:</label>
+    <img src="{{ profile.background.url }}">
+    <input type="file" name="background">
+  </div>
+
+  <input type="submit" value="Atualizar">
+
+</form>
+
+{% if username_error %}
+  Erro: o nome de usuário já existe.
+{% endif %}
+
+{% if invalid_email %}
+  Erro: insira um email válido.
+{% endif %}
+
+{% if email_error %}
+  Erro: o email já foi cadastrado.
+{% endif %}
+
+{% if invalid_url %}
+  Erro: o url é inválido.
+{% endif %}

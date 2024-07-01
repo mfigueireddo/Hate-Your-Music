@@ -12,7 +12,29 @@
 
 <body>
 
-  Teste
+  <div>
+    {% if authentication %}
+      Seja bem-vindo(a), {{ user.username }}! <br>
+      <a href="{% url 'user_logout' %}">Sair</a>
+    {% else %}
+      Entre <a href="{% url 'user_login' %}">aqui</a> <br>
+      Cadastre-se <a href="{% url 'user_create' %}">aqui</a>
+    {% endif %}
+  </div>
+
+  <div>
+    {% if authentication %}
+      Acesse <a href="{% url 'user_menu' user.id %}">seu perfil</a> <br>
+      Acesse <a href="{% url 'music_menu' user.id %}">suas músicas</a> <br>
+      Acesse <a href="{% url 'playlist_menu' user.id %}">suas playlists</a>
+    {% endif %}
+  </div>
+
+  <div>
+    {% if authentication %}
+      <a href="{% url 'follow_list' user.id %}">Faça amigos!</a>
+    {% endif %}
+  </div>
 
 </body>
 

@@ -1,0 +1,49 @@
+<!-- Usuários -->
+
+<div>
+  <h2>Usuários cadastrados</h2>
+  {% for user in users %}
+    {{ user.username }} 
+    <a href="{% url 'user_view' user.id %}">Visualizar</a>
+    <a href="{% url 'user_update' user.id %}"">Editar perfil</a> 
+    <a href="{% url 'password_update' user.id %}"">Editar senha</a> 
+    <a href="{% url 'user_delete' user.id %}"">Deletar</a> <br>
+  {% endfor %}
+</div>
+
+<div>
+  <a href="{% url 'user_create' %}"">Criar perfil</a>
+</div>
+
+<!-- Músicas -->
+
+<div>
+  <h2>Músicas cadastradas</h2>
+  {% for music in musics %}
+    {{ music.name }}
+    <a href="{% url 'music_view' music.id %}"">Visualizar</a>
+    <a href="{% url 'music_update' music.id %}">Editar</a>
+    <a href="{% url 'music_delete' music.id %}">Deletar</a> <br>
+  {% endfor %}
+</div>
+
+<div>
+  <a href="{% url 'music_create' %}">Cadastrar música</a>
+</div>
+
+<!-- Playlists -->
+
+<div>
+  <h2>Playlists cadastradas</h2>
+  {% for playlist in playlists %}
+    {{ playlist.name }}
+    <a href="{% url 'playlist_view' playlist.id %}">Ver</a>
+    <a href="{% url 'playlist_add_music' playlist.id %}">Adicionar músicas</a>
+    <a href="{% url 'playlist_update' playlist.id %}">Editar</a>
+    <a href="{% url 'playlist_delete' playlist.id %}">Deletar</a> <br>
+  {% endfor %}
+</div>
+
+<div>
+  <a href="{% url 'playlist_create' user.id %}">Criar playlist</a>
+</div>

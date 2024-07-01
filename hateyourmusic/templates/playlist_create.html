@@ -1,0 +1,19 @@
+<h1>Criar playlist</h1>
+
+<form method="POST" enctype="multipart/form-data">
+
+  {% csrf_token %}
+
+  <div>
+    <label>Nome:</label>
+    <input type="text" name="name" required>
+  </div>
+
+  <div>
+    <label>Cover</label>
+    <input type="file" name="cover">
+  </div>
+
+  <input type="submit" value="Registrar">
+
+</form>

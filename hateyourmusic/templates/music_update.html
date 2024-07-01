@@ -1,0 +1,24 @@
+<h1>Atualizar música</h1>
+
+<form method="POST" enctype="multipart/form-data">
+
+  {% csrf_token %}
+
+  <div>
+    <label>Nome:</label>
+    <input type="text" name="name" value="{{ music.name }}">
+  </div>
+  
+  <div>
+    <label>Artista:</label>
+    <input type="text" name="artist" value="{{ music.artist }}">
+  </div>
+
+  <div>
+    <label>URL:</label>
+    <input type="url" name="url" value="{{ music.url }}">
+  </div>
+
+  <input type="submit" value="Atualizar">
+
+</form>

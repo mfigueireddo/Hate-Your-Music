@@ -1,0 +1,11 @@
+<h3>AVISO!</h3>
+<p>Você tem certeza que deseja deletar o usuario @{{ user.username }}? </p>
+
+<form method="POST">
+
+  {% csrf_token %}
+
+  <input type="submit" name="sim" value="Sim">
+  <input type="submit" name="nao" value="Não">
+  
+</form>

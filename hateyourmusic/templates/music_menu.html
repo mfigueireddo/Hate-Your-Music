@@ -1,0 +1,9 @@
+<div>
+  Seja bem-vindo(a), {{ user.username }}! <br>
+  <a href="{% url 'user_logout' %}">Sair</a>
+</div>
+
+<div>
+  <a href="{% url 'user_musics' user.id %}">Ver músicas</a> <br>
+  <a href="{% url 'music_create' user.id %}">Adicionar músicas</a>
+</div>

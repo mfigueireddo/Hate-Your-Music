@@ -1,0 +1,28 @@
+<div>
+  Seja bem-vindo(a), {{ profile.user.username }}! <br>
+  <a href="{% url 'user_logout' %}">Sair</a>
+</div>
+
+<form method="POST">
+
+  {% csrf_token %}
+
+  {% for options_profile in options %} <!-- Lista todos os perfis -->
+    {% if options_profile != profile %} <!-- Só mostra se não for o perfil do usuário-->
+      <div>
+        {{ options_profile.user.username }}
+        <input type="hidden" name="target_id" value="{{ options_profile.id }}">
+        {% if follows %} <!-- Se o usuário seguir alguém -->
+          {% if options_profile not in follows %} <!-- Se o perfil não estiver sendo seguido-->
+            <input type="submit" name="follow" value="Seguir">
+          {% else %} <!-- Se o usuário seguir o perfil -->
+            <input type="submit" name="unfollow" value="Parar de seguir">
+          {% endif %}
+        {% else %} <!-- Se o usuário não seguir ninguém-->
+          <input type="submit" name="follow" value="Seguir">
+        {% endif %}
+      </div>
+    {% endif %}
+  {% endfor %}
+
+</form>

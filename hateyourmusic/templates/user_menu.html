@@ -1,0 +1,11 @@
+<div>
+  Seja bem-vindo(a), {{ user.username }}! <br>
+  <a href="{% url 'user_logout' %}">Sair</a>
+</div>
+
+<div>
+  <a href="{% url 'user_view' user.id %}">Ver perfil</a> <br>
+  <a href="{% url 'user_update' user.id %}">Editar perfil</a> <br>
+  <a href="{% url 'password_update' user.id %}">Alterar senha</a> <br>
+  <a href="{% url 'user_delete' user.id %}">Deletar perfil</a>
+</div>

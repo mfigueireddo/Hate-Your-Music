@@ -1,0 +1,95 @@
+<h1>Registrar usuário</h1>
+
+<form method="POST" enctype="multipart/form-data">
+
+  {% csrf_token %}
+
+  <div>
+    <label>Nome de usuário:</label>
+    <input type="text" name="username" required>
+  </div>
+
+  <div>
+    <label>Nome:</label>
+    <input type="text" name="name">
+  </div>
+
+  <div>
+    <label>E-mail:</label>
+    <input type="email" name="email" required>
+  </div>
+
+  <div>
+    <label>Senha:</label>
+    <input type="password" name="password" required>
+  </div>
+
+  <div>
+    <label>Biografia:</label>
+    <input type="text" name="biography">
+  </div>
+
+  <div>
+    <label>Localização:</label>
+    <input type="text" name="location">
+  </div>
+
+  <div>
+    <label>Site:</label>
+    <input type="url" name="url">
+  </div>
+
+  <div>
+    <label>Aniversário:</label>
+    <input type="date" name="birthday">
+  </div>
+
+  <div>
+    <label>Foto de perfil:</label>
+    <input type="file" name="icon">
+  </div>
+
+  <div>
+    <label>Foto de fundo:</label>
+    <input type="file" name="background">
+  </div>
+
+  <input type="submit" value="Registrar">
+
+</form>
+
+{% if username_error %}
+  Erro: o nome de usuário já existe.
+{% endif %}
+
+{% if invalid_email %}
+  Erro: insira um email válido.
+{% endif %}
+
+{% if email_error %}
+  Erro: o email já foi cadastrado.
+{% endif %}
+
+{% if invalid_url %}
+  Erro: o URL é inválido.
+{% endif %}
+
+{% if password_error %}
+  {% for message in password_error_message %}
+    {{ message }}
+    <br>
+  {% endfor %}
+{% endif %}
+
+{% if icon_error %}
+  Erro: a imagem de perfil deve ser, no máximo, de 800x800
+{% endif %}
+
+{% if background_error %}
+  Erro: a imagem de perfil deve ser, no máximo, de 800x800
+{% endif %}
+
+{% if creation_error %}
+  Houve um erro na criação do usuário.
+  {{ creation_error_message }}
+{% endif %}
