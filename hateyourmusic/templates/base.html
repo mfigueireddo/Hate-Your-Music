@@ -1,0 +1,132 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="images/favicon.ico">
+    <title>Hate Your Music</title>
+    <link rel="stylesheet" href="{% static 'base.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="menu-desktop">
+          <div class="logo">   
+              <a href="#"><img id="logoimg" src="{% static 'images/Logo_completa.png' %}" alt="logo"></a>
+          </div>
+            <div class="menu">
+                <nav>
+                    <a href="#">Para Você</a>
+                    <a href="#">Novidades</a>
+                    <a href="#">Playlists</a>
+                </nav>
+            </div>
+            <div class="user-interaction">
+                <a id="bell"><img src="{% static 'images/bell.png' %}" alt="Sino de notificações"></a>
+                <a id="avatar" href="#"><img src="{% static 'images/avatar.png' %}" alt="Avatar"></a>
+            </div>
+        </div>
+        <div class="menu-mobile">
+            <div class="logoMobile">
+                <a href="#"><img id="logoMobile" src="{% static 'images/logo.png' %}" alt="Logo Mobile"></a>
+            </div>
+            <div class="user-interaction">
+                <a id="bell"><img src="{% static 'images/bell.png' %}" alt="Sino de notificações"></a>
+                <a id="avatar" href="#"><img src="{% static 'images/avatar.png' %}" alt="Avatar"></a>
+                <i class="menuHamb" onclick="clickMenu()"><img src="{% static 'images/menu.svg'%}" alt="Menu"></i>
+            </div>
+            <div class="menu-items" id="mobileMenu">
+                <nav>
+                    <a href="#">Para Você</a>
+                    <a href="#">Novidades</a>
+                    <a href="#">Playlists</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <ul>
+            <li><h1>Artistas Salvos</h1></li>
+            <p>Lady Gaga</p><br>
+            <p>Beyoncé</p><br>
+            <p>Taylor Swift</p><br>
+            <a id="verMais" href="#">Ver mais</a><br><br>
+
+            <li><h1>Estilos Favoritos</h1></li>
+            <p>Rock</p><br>
+            <p>Pop</p><br>
+            <p>MPB</p><br>
+            <a id="verMais" href="#">Ver mais</a><br><br>
+
+            <li><h1>Comunidades</h1></li>
+            <p>Blablabla</p><br>
+            <p>Pirimpimpim</p><br>
+            <p>Tchurinfunflas</p><br>
+            <a id="verMais" href="#">Ver mais</a>
+        </ul>
+    </div>
+
+    <div class="right_container">
+        <div class="search-container">
+            <input type="search" class="search-input" placeholder="Buscar no H.Y.M">
+        </div>
+
+        <div class="trending">
+            <h1>Assuntos do Momento</h1>
+            <p>#Grammy2024</p><br>
+            <p>#Charliexcz</p><br>
+            <p>#HMHAS</p><br>
+            <a class="expandTrend" href="#">Ver mais...</a>
+        </div>
+
+        <div class="music-player">
+            <img id="capa" src="{% static 'images/icones/Rectangle 113.png' %}" alt="Famous - Kanye West">
+            <div class="track-info">
+                <div class="track-details">
+                    <div class="track-name">Famous</div>
+                    <div class="artist-name">Kanye West</div>
+                </div>
+                <div class="reacts">
+                    <img src="{% static 'images/icones/heart.png' %}" alt="love">
+                    <img src="{% static 'images/icones/emoji_bravo.png' %}" alt="hate">
+                    <img src="{% static 'images/icones/share.png' %}" alt="share">
+                </div>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+                <span id="duration">0:00</span>
+            </div>
+            <div class="controls">
+                <button class="back"><img src="{% static 'images/icones/setaesq.png' %}" alt="back"></button>
+                <button class="play"><img src="{% static 'images/icones/play.png' %}" alt="Play"></button>
+                <button class="skip"><img src="{% static 'images/icones/setadir.png' %}" alt="skip"></button>
+            </div>
+        </div>
+    </div>
+
+  <div class="content">
+    {% block content %}
+    {% endblock %}
+  </div>
+
+    <script>
+       function clickMenu() {
+    const menu = document.getElementById('mobileMenu');
+    if (menu.style.display === 'block') {
+        menu.style.display = 'none';
+    } else {
+        menu.style.display = 'block';
+    }
+}
+
+        
+    </script>
+    
+</body>
+</html>

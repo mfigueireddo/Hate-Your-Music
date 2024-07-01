@@ -1,0 +1,381 @@
+/* Reset de estilos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos gerais */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #fff;
+}
+
+.menu-desktop {
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+    height: 92px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-mobile {
+    display: none;
+}
+
+.menu {
+    color: #000;
+    display: flex;
+    align-items: center;
+}
+
+.logo #logoimg {
+    margin-left: 30px;
+    width: 250px;
+    max-width: 100%;
+    height: auto;
+    margin-top: 8%;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+nav a {
+    margin-right: 20px;
+    color: #000;
+    text-decoration: none;
+    font-size: 20px;
+    margin-inline: 80px;
+}
+
+.menu-desktop .user-interaction {
+    display: flex;
+    align-items: center;
+}
+
+.menu-desktop .user-interaction img {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    margin-right: 50px;
+}
+
+.menu-desktop .user-interaction #bell {
+    margin-right: 10px;
+}
+
+/* Estilos específicos para a barra lateral esquerda */
+.container {
+    width: 20%;
+    background-color: #645DD8;
+    color: #fff;
+    padding-top: 20px;
+    position: fixed;
+    left: 0;
+    height: calc(100% - 92px);
+    overflow-y: auto;
+}
+
+.container h1 {
+    font-weight: bold;
+    margin-left: 8%;
+}
+
+.container ul {
+    list-style: none;
+}
+
+.container li {
+    margin-bottom: 10px;
+}
+
+.container p {
+    padding-left: 30px;
+    margin-left: 12%;
+}
+
+.container a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 15px;
+    padding-left: 30px;
+    font-weight: bold;
+    margin-left: 12%;
+}
+
+/*LADO DIREITOOOOOOO*/
+.right_container {
+    position: fixed;
+    width: 20%;
+}
+
+.search-container {
+    position: fixed;
+    top: 92px;
+    right: 4%;
+    display: flex;
+    align-items: center;
+    padding-top: 1%;
+    z-index: 100000;
+}
+
+.search-container input[type="search"] {
+    width: 320px;
+    height: 44px;
+    padding: 5px 10px 5px 40px; /* ajuste o padding-left para dar espaço à imagem */
+    font-size: 16px;
+    border: 2px solid #645DD8;
+    border-radius: 10px;
+    color: #000;
+    outline: none;
+    background: url('images/search.png') no-repeat 10px center;
+    background-size: 16px 16px;
+}
+
+/* Estilos para a seção "Assuntos do Momento" */
+.trending {
+    padding-top: 4%;
+    color: #000;
+    position: fixed;
+    right: 5%;
+}
+
+.trending h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.trending p {
+    font-size: 20px;
+    margin-left: 20%;
+}
+
+.trending a.expandTrend {
+
+    font-size: 16px;
+    margin-left: 20%;
+    color: #000;
+    font-style: italic;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.music-player {
+    position: fixed;
+    top: 500px; /* Altura fixa em relação ao topo da janela */
+    right: 5%;
+    z-index: 1000;
+}
+
+
+
+.music-player img {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.track-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.track-details {
+    display: flex;
+    flex-direction: column;
+}
+
+#capa {
+
+    position: fixed;
+    right: 300px;
+}
+
+.track-name {
+    color: #000;
+    font-weight: bold;
+}
+
+.artist-name {
+    color: #727171;
+}
+
+.reacts {
+    display: flex;
+    gap: 10px;
+    margin-left: auto;
+}
+.progress-bar-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.progress-bar {
+    height: 8px;
+    background-color: #ddd;
+    width: 100%;
+    cursor: pointer;
+
+/* Espaço entre a barra e o tempo */
+
+    position: relative;
+}
+
+.progress {
+    height: 8px;
+    background-color: #645DD8;
+    border-radius: 2px;
+    width: 50%; /* Apenas para exemplo, ajuste conforme necessário */
+}
+
+.time {
+    color: #645DD8;
+    white-space: nowrap;
+}
+
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    background-color: transparent;
+    border: none;
+}
+
+.controls button {
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+/* Media queries */
+@media screen and (max-height: 800px) {
+    .container {
+        height: calc(100% - 92px);
+    }
+
+    .container li {
+        font-size: 11px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .menu-desktop{
+        display: none;
+    }
+    .menu-mobile {
+        background-color: #fff;
+        border-bottom: 1px solid #ccc;
+        height: 80px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+        position: relative;
+        z-index: 10000; /* Adicionado para permitir o posicionamento absoluto do dropdown */
+    }
+
+    .menu-mobile .user-interaction img {
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
+        margin-inline: 10px;
+    }
+
+    .menu-mobile .logoMobile {
+        margin-left: 20px;
+        width: 40px;
+        max-width: 100%;
+        height: auto;
+        margin-top: 4%;
+    }
+
+    .menu-mobile .iconMenuMobile {
+        width: 30px;
+        height: 30px;
+        object-fit: cover;
+    }
+
+    #mobileMenu {
+        display: none;
+        background-color: #645DD8;
+        color: #fff;
+        border: 3px #ddd;
+        padding: 10px;
+        position: absolute; /* Adicionado para permitir a abertura para baixo */
+        top: 80px; /* Ajuste conforme necessário para que o menu comece logo abaixo da barra de navegação */
+        width: 100%; /* Ajuste conforme necessário para a largura desejada */
+        left: 0; /* Ajuste conforme necessário para alinhar à esquerda */
+    }
+
+    #mobileMenu nav a {
+        display: block;
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 0;
+    }
+
+
+    .search-container {
+        top: 80px;
+        right: 10px;
+
+
+    }
+
+    .search-container input[type="search"] {
+        width: 150px;
+        padding: 5px 10px 5px 40px; /* ajuste o padding-left para dar espaço à imagem */
+        background-color: #fff;
+    }
+
+    .trending {
+        top: 130px; /* ajuste conforme necessário */
+        width: 200px;
+    }
+
+    .trending h1 {
+        font-size: 18px;
+        margin-bottom: 8px;
+    }
+
+    .trending p {
+        font-size: 14px;
+        margin-bottom: 4px;
+    }
+
+    .trending a.expandTrend {
+        font-size: 12px;
+        margin-top: 8px;
+    }
+
+    .right_container {
+        width: 200px;
+        padding-top: 80px;
+        z-index: 200000;
+    }
+
+    .trending h1 {
+        font-size: 18px;
+        margin-bottom: 8px;
+    }
+
+    .trending p {
+        font-size: 14px;
+        margin-bottom: 4px;
+    }
+
+    .trending a.expandTrend {
+        font-size: 12px;
+        margin-top: 8px;
+    }
+
+    #capa {
+        right: 250px;
+    }
+}
