@@ -15,12 +15,12 @@
     <header>
         <div class="menu-desktop">
           <div class="logo">   
-              <a href="#"><img id="logoimg" src="{% static 'images/Logo_completa.png' %}" alt="logo"></a>
+              <a href="{% url 'home' %}"><img id="logoimg" src="{% static 'images/Logo_completa.png' %}" alt="logo"></a>
           </div>
             <div class="menu">
                 <nav>
-                    <a href="#">Para Você</a>
-                    <a href="#">Novidades</a>
+                    <a href="#">Faça Amigos</a>
+                    <a href="#">Comunidades</a>
                     <a href="#">Playlists</a>
                 </nav>
             </div>
@@ -40,8 +40,8 @@
             </div>
             <div class="menu-items" id="mobileMenu">
                 <nav>
-                    <a href="#">Para Você</a>
-                    <a href="#">Novidades</a>
+                    <a href="#">Faça Amigos</a>
+                    <a href="#">Comunidades</a>
                     <a href="#">Playlists</a>
                 </nav>
             </div>
@@ -62,11 +62,11 @@
             <p>MPB</p><br>
             <a id="verMais" href="#">Ver mais</a><br><br>
 
-            <li><h1>Comunidades</h1></li>
+            <li><h1>Suas Comunidades</h1></li>
             <p>Blablabla</p><br>
             <p>Pirimpimpim</p><br>
             <p>Tchurinfunflas</p><br>
-            <a id="verMais" href="#">Ver mais</a>
+            <a id="verMais" href="{% url 'comunidades' %}">Ver mais</a>
         </ul>
     </div>
 

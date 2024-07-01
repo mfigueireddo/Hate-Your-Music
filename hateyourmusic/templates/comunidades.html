@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+  .checkbox-container {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    margin-left: 50%;
+  }
+
+  .checkbox-label {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+  }
+
+  .checkbox-label input[type="checkbox"] {
+    margin-right: 10px;
+  }
+
+  h2 {
+    text-align: center;
+    color: black;
+    background-color: purple;
+  }
+  .search-comunidades{
+    margin-left: 50%;
+    
+  }
+
+  .search-comunidades input[type="search"] {
+      width: 320px;
+      height: 44px;
+      padding: 5px 10px 5px 40px; /* ajuste o padding-left para dar espaço à imagem */
+      font-size: 16px;
+      border: 2px solid #645DD8;
+      border-radius: 10px;
+      color: #727171;
+      outline: none;
+      background: url('images/search.png') no-repeat 10px center;
+      background-size: 16px 16px;
+  }
+  
+</style>
+
+<h2>Filtros:</h2>
+
+<div class="checkbox-container">
+  <label class="checkbox-label">
+    <input type="checkbox" name="minhas">
+    Minhas
+  </label>
+  <label class="checkbox-label">
+    <input type="checkbox" name="seguindo">
+    Seguindo
+  </label>
+</div>
+
+<h2>Buscar Comunidades:</h2>
+<div class="search-comunidades">
+    <input type="search" class="search-input" placeholder="Buscar Comunidades">
+</div>
+
+{% endblock %}
