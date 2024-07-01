@@ -1,19 +1,106 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html>
-
+<html lang="pt-BR">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>Hate Your Music</title>
-  <link href="{% static 'style.css' %}" rel="stylesheet" type="text/css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hate Your Music</title>
+    <link href="{% static 'styles.css' %}" rel="stylesheet" type="text/css" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
 </head>
-
 <body>
+    <header>
+        <div class="logo">
+            <a href="home.html"><img src="{% static 'images/logo.png' %}" alt="Logo" class="logo-img"></a>
+        </div>
+        <nav>
+            <a href="../foryou/paravoce.html">Para Você</a>
+            <a href="../novidades/novidades.html">Novidades</a>
+            <a href="../playlists/nov.html">Playlists</a>
+        </nav>
+        <div class="icons">
+            <a href="#" class="icon">
+                <img src="{% static 'images/bell.png' %}" alt="Botão Notificação">
+              </a>
+            <a href="#" class="icon">
+                <img src="{% static 'images/avatar.png' %}" alt="Perfil">
+              </a>
+        </div>
+    </header>
 
-  Teste bla bla bla
+    <aside class="sidebar">
+        <section>
+            <h2>Artistas Salvos</h2>
+            <p>Lady Gaga</p>
+            <p>Taylor Swift</p>
+            <p>Beyoncé</p>
+            <a href="#">Ver mais...</a>
+        </section>
+        <section>
+            <h2>Estilos Favoritos</h2>
+            <p>Pop</p>
+            <p>R&B</p>
+            <p>Forró</p>
+            <a href="#">Ver mais...</a>
+        </section>
+        <section>
+            <h2>Comunidades</h2>
+            <p>Fulaninhos</p>
+            <p>BlaBlaBla</p>
+            <p>Piriri</p>
+            <a href="#">Ver mais...</a>
+        </section>
+    </aside>
 
+    <aside class="right-sidebar">
+        <div class="search-bar">
+            <input type="text" placeholder="Buscar no H.Y.M">
+            <img src="{% static 'images/lupa.png' %}" alt="Ícone de Lupa">
+        </div>
+        <div class="trending-topics">
+            <h2>Assuntos do Momento</h2>
+            <ul>
+                <li>#Tcharanran</li>
+                <li>#BlaBlaBla</li>
+                <li>#Piriri</li>
+            </ul>
+            <a href="#">Ver mais...</a>
+        </div>
+    </aside>
+
+    <div class="conteudo">
+        <img src="{% static 'images/iconperfil.png' %}" alt="Foto de perfil" class="profile-img">
+        <div class="perfil-info">
+            <h1>Fulaninho de Tal</h1>
+            <p>@fulaninho123</p>
+            <div class="follow-info">
+                <span>000 Seguindo</span>
+                <span>000 Seguidores</span>
+                
+            </div>
+        </div>
+        <hr size="10" width="100%" align="center" noshade color=#645dd8>
+        <div class="secoes">
+            <a href="#">Posts</a>
+            <a href="#">Artistas Salvos</a>
+            <a href="#">Playlists</a>
+        </div>
+        <div class="posts">
+            <h2>Posts</h2>
+            <div class="post">
+                <p>@fulaninho123</p>
+                <p>Vocês viram o Grammy de 2022??</p>
+                <p>27 Respostas</p>
+            </div>
+            <div class="post">
+                <p>@fulaninho123</p>
+                <p>Sei lá viu!</p>
+                <p>27 Respostas</p>
+            </div>
+        </div>
+    </div>
+    
 </body>
-
 </html>
