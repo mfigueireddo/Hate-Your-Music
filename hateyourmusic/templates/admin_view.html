@@ -4,15 +4,15 @@
   <h2>Usuários cadastrados</h2>
   {% for user in users %}
     {{ user.username }} 
-    <a href="/users/profile/{{ user.id }}">Visualizar</a>
-    <a href="/users/update/{{ user.id }}">Editar perfil</a> 
-    <a href="/users/update_password/{{ user.id }}">Editar senha</a> 
-    <a href="/users/delete/{{ user.id }}">Deletar</a> <br>
+    <a href="{% url 'user_view' user.id %}">Visualizar</a>
+    <a href="{% url 'user_update' user.id %}"">Editar perfil</a> 
+    <a href="{% url 'password_update' user.id %}"">Editar senha</a> 
+    <a href="{% url 'user_delete' user.id %}"">Deletar</a> <br>
   {% endfor %}
 </div>
 
 <div>
-  <a href="/users/create">Criar perfil</a>
+  <a href="{% url 'user_create' %}"">Criar perfil</a>
 </div>
 
 <!-- Músicas -->
@@ -21,14 +21,14 @@
   <h2>Músicas cadastradas</h2>
   {% for music in musics %}
     {{ music.name }}
-    <a href="/musics/view/{{ music.id }}">Visualizar</a>
-    <a href="/musics/update/{{ music.id }}">Editar</a>
-    <a href="/musics/delete/{{ music.id }}">Deletar</a> <br>
+    <a href="{% url 'music_view' music.id %}"">Visualizar</a>
+    <a href="{% url 'music_update' music.id %}">Editar</a>
+    <a href="{% url 'music_delete' music.id %}">Deletar</a> <br>
   {% endfor %}
 </div>
 
 <div>
-  <a href="/musics/create">Cadastrar música</a>
+  <a href="{% url 'music_create' %}">Cadastrar música</a>
 </div>
 
 <!-- Playlists -->
@@ -37,13 +37,13 @@
   <h2>Playlists cadastradas</h2>
   {% for playlist in playlists %}
     {{ playlist.name }}
-    <a href="/playlists/view/{{ playlist.id }}">Ver</a>
-    <a href="/playlists/add_music/{{ playlist.id }}">Adicionar músicas</a>
-    <a href="/playlists/update/{{ playlist.id }}">Editar</a>
-    <a href="/playlists/delete/{{ playlist.id }}">Deletar</a> <br>
+    <a href="{% url 'playlist_view' playlist.id %}">Ver</a>
+    <a href="{% url 'playlist_add_music' playlist.id %}">Adicionar músicas</a>
+    <a href="{% url 'playlist_update' playlist.id %}">Editar</a>
+    <a href="{% url 'playlist_delete' playlist.id %}">Deletar</a> <br>
   {% endfor %}
 </div>
 
 <div>
-  <a href="/playlists/create/{{ user.id }}">Criar playlist</a>
+  <a href="{% url 'playlist_create' user.id %}">Criar playlist</a>
 </div>

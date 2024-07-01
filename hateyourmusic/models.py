@@ -24,9 +24,11 @@ class Profile(models.Model):
   icon = models.ImageField(null=True,blank=True,upload_to="profile_icons/")
   background = models.ImageField(null=True,blank=True,upload_to="profile_backgrounds/")
   playlists = models.ManyToManyField(Playlist)
+  following = models.IntegerField(blank=True, default=0)
+  followers = models.IntegerField(blank=True, default=0)
 
 class Follow(models.Model):
-  user = models.ForeignKey(User, related_name="following", on_delete=models.CASCADE)
-  follower = models.ForeignKey(User, related_name="followers", on_delete=models.CASCADE)
+  followed = models.ForeignKey(Profile, related_name="followed_by", on_delete=models.CASCADE)
+  follower = models.ForeignKey(Profile, related_name="follower_of", on_delete=models.CASCADE)
   class Meta:
-    unique_together = ('user','follower')
+    unique_together = ('followed','follower')

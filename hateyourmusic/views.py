@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Profile, Music, Playlist
+from .models import Profile, Music, Playlist, Follow
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
@@ -23,6 +23,56 @@ def admin_view(request):
   context["musics"] = Music.objects.all()
   context["playlists"] = Playlist.objects.all()
   return render(request,"admin_view.html",context)
+
+@login_required
+def follow_list(request,id):
+
+  # Perfil do usuário
+  user = User.objects.get(id = id)
+  profile = Profile.objects.get(user=user)
+  # Todos os perfis
+  options = Profile.objects.all()
+  # Relações em que o seguido é o usuário
+  follows = Follow.objects.filter(follower=profile)
+  if follows.exists():
+    follows = [follow.followed for follow in follows]
+  else:
+    follows = []
+  
+  context = {"profile": profile}
+  context["options"] = options
+  context["follows"] = follows
+  
+  if request.method == "POST":
+
+    target_id = request.POST["target_id"]
+    target_profile = Profile.objects.get(id=target_id)
+    
+    if "follow" in request.POST:
+      
+      profile.following += 1
+      profile.save()
+      
+      target_profile.followers += 1
+      target_profile.save()
+      
+      Follow.objects.create(
+        followed = target_profile,
+        follower = profile
+      )
+
+    elif "unfollow" in request.POST:
+
+      profile.following -= 1
+      profile.save()
+      
+      target_profile.followers -= 1
+      target_profile.save()
+
+      follow = Follow.objects.get(followed=target_profile, follower=profile)
+      follow.delete()
+    
+  return render(request,"follow_list.html",context)
 
 # Usuário
 
@@ -96,7 +146,7 @@ def user_create(request):
               url=url,
               birthday=birthday,
               icon=icon_path,
-              background=background_path,
+              background=background_path
           )
         
       return redirect("home")

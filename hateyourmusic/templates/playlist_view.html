@@ -3,6 +3,10 @@
   <a href="{% url 'user_logout' %}">Sair</a>
 </div>
 
+<div>
+  <img src="{{ playlist.cover.url }}">
+</div>
+
 {% for music in playlist.musics.all %}
   <div>
     <a href="{{ music.url }}">{{ music.name }} - {{ music.artist }}</a>

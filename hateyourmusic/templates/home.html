@@ -30,6 +30,12 @@
     {% endif %}
   </div>
 
+  <div>
+    {% if authentication %}
+      <a href="{% url 'follow_list' user.id %}">Faça amigos!</a>
+    {% endif %}
+  </div>
+
 </body>
 
 </html>

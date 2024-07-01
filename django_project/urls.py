@@ -9,6 +9,7 @@ urlpatterns = [
     path("", views.home, name="home"),
     path("admin/", admin.site.urls),
     path("admin_view", views.admin_view),
+    path("follow_list/<id>", views.follow_list, name="follow_list"),
     # Usuário
     path("users/create", views.user_create, name="user_create"),
     path("users/login", views.user_login, name="user_login"),
